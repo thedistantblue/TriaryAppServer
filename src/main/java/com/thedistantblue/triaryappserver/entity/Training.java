@@ -30,7 +30,7 @@ public class Training implements Serializable {
     @NotBlank
     private Date trainingDate;
 
-    //@ManyToOne(targetEntity = Exercise.class)
+    //@OneToMany(targetEntity = Exercise.class)
     //private List<Exercise> trainingExercises;
 
 }

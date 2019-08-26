@@ -5,9 +5,8 @@ import com.thedistantblue.triaryappserver.database.SetRepositoryJPA;
 import com.thedistantblue.triaryappserver.database.TrainingRepositoryJPA;
 import com.thedistantblue.triaryappserver.entity.Training;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/training", produces = "application/json")
@@ -26,8 +25,14 @@ public class TrainingController {
         this.setRepositoryJPA = setRepositoryJPA;
     }
 
-    @GetMapping
+    @GetMapping(path = "/all")
     public Iterable<Training> sendTrainingList() {
         return trainingRepositoryJPA.findAll();
+    }
+
+    @PostMapping(path = "/add", consumes = "application/json")
+    public void addTraining(@RequestBody String str) {
+        System.out.println(str);
+        //trainingRepositoryJPA.save(training);
     }
 }
