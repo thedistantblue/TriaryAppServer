@@ -1,5 +1,8 @@
 package com.thedistantblue.triaryappserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,23 +14,23 @@ import java.util.*;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@NoArgsConstructor //(access = AccessLevel.PRIVATE, force = true)
 @Table(name = "training_test")
 public class Training implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@JsonProperty("serverId")
+    @JsonIgnore
     private long id;
 
-    @NotBlank
+    @JsonProperty("id")
     private String uuidId;
 
-    @NotBlank
     private long userId;
 
-    @NotBlank
     private String trainingName;
 
-    @NotBlank
+    @JsonIgnore // Пишет, что разные форматы, надо будет переделать
     private Date trainingDate;
 
     //@OneToMany(targetEntity = Exercise.class)
