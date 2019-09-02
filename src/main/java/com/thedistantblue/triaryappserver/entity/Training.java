@@ -1,8 +1,6 @@
 package com.thedistantblue.triaryappserver.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,12 +8,13 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
 @Data
 @NoArgsConstructor //(access = AccessLevel.PRIVATE, force = true)
-@Table(name = "training_test")
+//@Table(name = "training")
 public class Training implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +29,17 @@ public class Training implements Serializable {
 
     private String trainingName;
 
-    @JsonIgnore // Пишет, что разные форматы, надо будет переделать
+     // Пишет, что разные форматы, надо будет переделать - СДЕЛАНО
     private Date trainingDate;
 
-    //@OneToMany(targetEntity = Exercise.class)
-    //private List<Exercise> trainingExercises;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Exercise> trainingExercises;
+
+
+    @JsonGetter("trainingDate")
+    private String getFormattedDate(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(trainingDate);
+    }
 
 }

@@ -23,20 +23,16 @@ public class Exercise implements Serializable {
     @JsonIgnore
     private long id;
 
-    @NotBlank
     @JsonProperty("id")
-    private UUID uuid_id;
+    private String uuidId;
 
-    @NotBlank
-    private UUID trainingId;
+    private String trainingId;
 
-    @NotBlank
     private String exerciseName;
 
-    @NotBlank
     private String exerciseComments;
 
-    @ManyToOne(targetEntity = Set.class)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Set> exerciseSets;
 
 }
