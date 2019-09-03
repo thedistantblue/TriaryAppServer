@@ -54,6 +54,23 @@ public class TrainingController {
         return trainingRepositoryJPA.findAll();
     }
 
+    /*
+    @GetMapping(path = "/all")
+    @ResponseStatus(HttpStatus.OK)
+    public String sendTrainings1() {
+        List<Training> trainingList = new ArrayList<>();
+        trainingRepositoryJPA.findAll().forEach(trainingList::add);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(trainingList);
+        } catch (JsonProcessingException exc) {
+            exc.printStackTrace();
+            return "";
+        }
+    }
+    */
+
+
     @PostMapping(path = "/add", consumes = "application/json")
     public void addTrainings(@RequestBody String json, HttpServletResponse response) {
         System.out.println(json);
@@ -62,7 +79,7 @@ public class TrainingController {
 
         try {
             //Чтобы не падал с ошибкой при обнаружении поля со списком упражнений
-            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            //mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             trainings = Arrays.asList(mapper.readValue(json, Training[].class));
             System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(trainings));
         } catch (Exception exc) {
