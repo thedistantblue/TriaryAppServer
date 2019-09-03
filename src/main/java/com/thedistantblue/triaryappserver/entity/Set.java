@@ -1,38 +1,36 @@
 package com.thedistantblue.triaryappserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+//@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Table(name = "Settable")
 public class Set implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private long id;
 
-    @NotBlank
-    private UUID uuid_id;
+    @JsonProperty("id")
+    private String uuidId;
 
-    @NotBlank
-    private UUID exerciseId;
+    @Column(name = "exercise_id")
+    private String exerciseId;
 
-    @NotBlank
     private int setNumber;
 
-    @NotBlank
     private int setRepetitions;
 
-    @NotBlank
     private double setWeight;
 
 }
