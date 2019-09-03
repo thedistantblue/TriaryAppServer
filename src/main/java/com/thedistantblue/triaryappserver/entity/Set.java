@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+//@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @Table(name = "Settable")
 public class Set implements Serializable {
     @Id
@@ -24,7 +24,7 @@ public class Set implements Serializable {
     @JsonProperty("id")
     private String uuidId;
 
-    @NotBlank
+    @Column(name = "exercise_id")
     private String exerciseId;
 
     private int setNumber;

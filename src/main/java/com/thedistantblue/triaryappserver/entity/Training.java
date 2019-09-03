@@ -23,6 +23,7 @@ public class Training implements Serializable {
     private long id;
 
     @JsonProperty("id")
+    @Column(name = "uuid_id")
     private String uuidId;
 
     private long userId;
@@ -33,6 +34,7 @@ public class Training implements Serializable {
     private Date trainingDate;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "training_id", referencedColumnName = "uuid_id")
     private List<Exercise> trainingExercises;
 
 

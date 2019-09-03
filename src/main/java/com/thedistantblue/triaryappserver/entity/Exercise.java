@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+//@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class Exercise implements Serializable {
 
     @Id
@@ -24,8 +24,10 @@ public class Exercise implements Serializable {
     private long id;
 
     @JsonProperty("id")
+    @Column(name = "uuid_id")
     private String uuidId;
 
+    @Column(name = "training_id")
     private String trainingId;
 
     private String exerciseName;
@@ -33,6 +35,7 @@ public class Exercise implements Serializable {
     private String exerciseComments;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "exercise_id", referencedColumnName = "uuid_id")
     private List<Set> exerciseSets;
 
 }
