@@ -13,10 +13,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.SessionScope;
 
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,17 +28,10 @@ import java.util.Optional;
 @Slf4j
 @RestController
 @RequestMapping(path = "/training", produces = "application/json")
-//@SessionAttributes("user")
 public class TrainingController {
     private TrainingRepositoryJPA trainingRepositoryJPA;
     private ExerciseRepositoryJPA exerciseRepositoryJPA;
     private SetRepositoryJPA setRepositoryJPA;
-
-    //Надо возвращать не нового юзера, а юзера, заполненного данными из бд
-    //@ModelAttribute("user")
-    //public User getUser() {
-    //    return new User();
-    //}
 
     @Autowired
     public TrainingController(TrainingRepositoryJPA trainingRepositoryJPA,
