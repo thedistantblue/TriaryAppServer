@@ -38,10 +38,16 @@ public class Training implements Serializable {
     private List<Exercise> trainingExercises;
 
 
+    /*
     @JsonGetter("trainingDate")
     private String getFormattedDate(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(trainingDate);
     }
+    */
 
+    @JsonGetter("trainingDate")
+    public long getTrainingDate() {
+        return this.trainingDate.getTime();
+    }
 }
